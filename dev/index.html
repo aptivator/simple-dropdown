@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dropdown</title>
+    <style>
+      simple-dropdown.my-dropdown:disabled {
+        opacity: 0.2;
+      }
+
+      form:invalid {
+        outline: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      window.handleChange = function(event) {
+        console.log('value', event.target.value);
+      }
+
+      function onSubmit(event) {
+        let form = document.querySelector('form');
+        let formData = new FormData(form);
+        event.preventDefault();
+        
+        console.log(form.elements);
+      }
+    </script>
+    <script type="module" src="./main.js"></script>
+    <form onsubmit="onSubmit(event)">
+      <simple-dropdown
+        class="my-dropdown"
+        disabled
+        onchange="handleChange(event)"
+        placeholder="Select choice"
+        name="selection"
+        itemsref="1">
+      </simple-dropdown>
+      <button type="reset">Reset</button>
+      <button type="submit">Send</butotn>
+    </form>
+  </body>
+</html>
