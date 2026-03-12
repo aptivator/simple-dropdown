@@ -17,14 +17,7 @@ let disabledValueEl = document.getElementById('disabled-value');
 let itemsrefValueEl = document.getElementById('itemsref-value');
 let requiredValueEl = document.getElementById('required-value');
 let dropdownEl = document.querySelector('simple-dropdown');
-let togglesStatusEl = document.getElementById('toggles-status');
 let form = document.querySelector('form');
-
-function displayTogglesStatus() {
-  let {disabled = false, itemsref, required = false} = dropdownEl;
-  let json = JSON.stringify({disabled, itemsref, required}, null, 2);
-  togglesStatusEl.innerText = json;
-}
 
 setTimeout(() => {
   disabledValueEl.innerText = dropdownEl.disabled || false;
@@ -35,20 +28,17 @@ setTimeout(() => {
 toggleRequiredButton.addEventListener('click', () => {
   dropdownEl.required = !dropdownEl.required;
   requiredValueEl.innerText = dropdownEl.required;
-  displayTogglesStatus();
 });
 
 toggleDisabledButton.addEventListener('click', () => {
   dropdownEl.disabled = !dropdownEl.disabled;
   disabledValueEl.innerText = dropdownEl.disabled;
-  displayTogglesStatus();
 });
 
 toggleItemsrefButton.addEventListener('click', () => {
   itemsref = itemsrefToNext[itemsref];
   dropdownEl.itemsref = itemsref;
   itemsrefValueEl.innerText = dropdownEl.itemsref;
-  displayTogglesStatus();
 });
 
 dropdownEl.addEventListener('change', (evt) => {
