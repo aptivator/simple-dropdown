@@ -28,7 +28,12 @@
   * [Listening for Value Changes](#listening-for-value-changes)
   * [Including a Dropdown Within a Form](#including-a-dropdown-within-a-form)
   * [Customizing the Default Styles](#customizing-the-default-styles)
+* [Component Interaction Modes](#component-interaction-modes)
+  * [Mouse Mode](#mouse-mode)
+  * [Keyboard Mode](#keyboard-mode)
+  * [Interaction CSS classes](#interaction-css-classes)
 * [Development](#development)
+  * [Development Prerequisites](#development-prerequisites)
   * [Development Setup](#development-setup)
   * [Contributing Changes](#contributing-changes)
 * [Caveats](#caveats)
@@ -395,7 +400,42 @@ simple-dropdown.my-dropdown:disabled {
 }
 ```
 
+## Component Interaction Modes
+
+### Mouse Mode
+
+The component supports full interaction through the use of a mouse.  Clicking a dropdown displays 
+its list of items.  Clicking it again hides the list.  Clicking a non-disabled item selects it and
+changes a component's value and triggers the `change` event.  All of these are fundamental functionalities.
+
+### Keyboard Mode
+
+Interaction with a `simple-dropdown` can also be accomplished via a keyboard.  When a component
+receives focus (by tabbing), hitting the Space key displays the list of selection options.  Pressing the
+key again hides the list.  When items are displayed, up and down arrow keys can be used to navigate them.
+`simple-dropdown` is different from other implementations in that an up or down arrow key press scrolls the
+items list up or down, respectively, by only one item.  Even when there are contiguous disabled items, they
+are not skipped.  Hitting the Escape key when the options list is open, will close the list.  Pressing the
+Enter key will change a component's value and trigger the `change` event.  Pressing the Space key when the
+items list is open will remove the list while preserving its scroll position and any potential item that was
+highlighted for selection.  Pressing the Escape key will reset a highlighted item and the scroll position.
+
+### Interaction CSS classes
+
+This implementation borrows from Angular framework's convention of `dirty` and `touched` classes.  When a
+freshly loaded `simple-dropdown`'s items are first displayed, the `simple-dropdown-touched` class is added
+to the element.  When any of the non-disabled items are hovered over or focused through the use of up and/or
+down keys, the `simple-dropdown-dirty` class is attached to the dropdown.  A dropdown with an initial or
+selected value gets tagged with the `simple-dropdown-selected` class.  `simple-dropdown-touched` and
+`simple-dropdown-dirty` are permanent: once they are added, they will not be removed.  The
+`simple-dropdown-selected` is removed when a component is cleared or reset.
+
 ## Development
+
+### Development Prerequisites
+
+The testing setup uses webdriver.io to communicate with Chrome browser.  The latter must be installed locally
+and be of a version supported by webdriver configuration.
 
 ### Development Setup
 
