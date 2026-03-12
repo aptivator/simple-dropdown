@@ -453,7 +453,7 @@ To start the visual development mode, run the following commands from within the
 `simple-dropdown` directory.
 
 ```
-cd dev
+cd demo
 npm install
 npm run dev
 ```
