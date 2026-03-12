@@ -492,3 +492,5 @@ declaration should be used.
 
 ## Demo
 
+Deployed component with several configuration toggles can be seen
+[here](https://aptivator.github.io/simple-dropdown/).
