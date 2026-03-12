@@ -1,7 +1,67 @@
 import {defineItems, registerSimpleDropdown} from '../src';
-//import '../src/simple-dropdown/simple-dropdown.css';
 
-defineItems('1', [
+let itemsref = 'numbers-full';
+
+let itemsrefToNext = {
+  'numbers-full': 'numbers',
+  'numbers': 'colors',
+  'colors': 'numbers-full'
+};
+
+let toggleRequiredButton = document.getElementById('toggle-required');
+let toggleDisabledButton = document.getElementById('toggle-disabled');
+let toggleItemsrefButton = document.getElementById('toggle-itemsref');
+let simpleDropdownValueEl = document.getElementById('simple-dropdown-value');
+let formDataValueEl = document.getElementById('form-data-value');
+let disabledValueEl = document.getElementById('disabled-value');
+let itemsrefValueEl = document.getElementById('itemsref-value');
+let requiredValueEl = document.getElementById('required-value');
+let dropdownEl = document.querySelector('simple-dropdown');
+let togglesStatusEl = document.getElementById('toggles-status');
+let form = document.querySelector('form');
+
+function displayTogglesStatus() {
+  let {disabled = false, itemsref, required = false} = dropdownEl;
+  let json = JSON.stringify({disabled, itemsref, required}, null, 2);
+  togglesStatusEl.innerText = json;
+}
+
+setTimeout(() => {
+  disabledValueEl.innerText = dropdownEl.disabled || false;
+  itemsrefValueEl.innerText = dropdownEl.itemsref;
+  requiredValueEl.innerText = dropdownEl.required || false;
+});
+
+toggleRequiredButton.addEventListener('click', () => {
+  dropdownEl.required = !dropdownEl.required;
+  requiredValueEl.innerText = dropdownEl.required;
+  displayTogglesStatus();
+});
+
+toggleDisabledButton.addEventListener('click', () => {
+  dropdownEl.disabled = !dropdownEl.disabled;
+  disabledValueEl.innerText = dropdownEl.disabled;
+  displayTogglesStatus();
+});
+
+toggleItemsrefButton.addEventListener('click', () => {
+  itemsref = itemsrefToNext[itemsref];
+  dropdownEl.itemsref = itemsref;
+  itemsrefValueEl.innerText = dropdownEl.itemsref;
+  displayTogglesStatus();
+});
+
+dropdownEl.addEventListener('change', (evt) => {
+  simpleDropdownValueEl.innerText = evt.target.value;
+});
+
+form.addEventListener('submit', (evt) => {
+  let formData = new FormData(evt.target);
+  formDataValueEl.innerText = formData.get('selection');
+  evt.preventDefault();
+});
+
+defineItems('numbers-full', [
   ['one', 'One'],
   ['two', 'Two', {disabled: true}],
   ['three', 'Three', {disabled: true}],
@@ -15,24 +75,18 @@ defineItems('1', [
   ['eleven', 'Eleven']
 ]);
 
-defineItems('2', [
+defineItems('numbers', [
   ['one', 'One'], 
   ['two', 'Two'], 
   ['three', 'Three']
 ]);
 
-defineItems('3', [
-  ['one', 'One'],
-  ['two', 'Two'],
-  ['three', 'Three'],
-  ['four', 'Four'],
-  ['five', 'Five'],
-  ['six', 'Six'],
-  ['seven', 'Seven'],
-  ['eight', 'Eight'],
-  ['nine', 'Nine'],
-  ['ten', 'Ten', {disabled: true}],
-  ['eleven', 'Eleven', {disabled: true}]
+defineItems('colors', [
+  ['green', 'Green'],
+  ['blue', 'Blue'],
+  ['red', 'Red'],
+  ['white', 'White'],
+  ['black', 'Black']
 ]);
 
 registerSimpleDropdown();

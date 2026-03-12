@@ -3,44 +3,52 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>dropdown</title>
-    <style>
-      simple-dropdown.my-dropdown:disabled {
-        opacity: 0.2;
-      }
-
-      form:invalid {
-        outline: 1px solid red;
-      }
-    </style>
+    <link rel="stylesheet" href="index.css" />
+    <title>Simple Dropdown</title>
   </head>
   <body>
-    <script>
-      window.handleChange = function(event) {
-        console.log('value', event.target.value);
-      }
-
-      function onSubmit(event) {
-        let form = document.querySelector('form');
-        let formData = new FormData(form);
-        event.preventDefault();
-        
-        console.log(form.elements);
-      }
-    </script>
+    <div class="simple-dropdown-container">
+      <h1>Simple Dropdown Example</h1>
+      <div id="dropdown-controls">
+        <button class="toggler" id="toggle-disabled">Toggle <span>disabled</span></button>
+        <button class="toggler" id="toggle-itemsref">Toggle <span>itemsref</span></button>
+        <button class="toggler" id="toggle-required">Toggle <span>required</span></button>
+      </div>
+      <form>
+        <simple-dropdown
+          name="selection"
+          class="my-dropdown"
+          itemsref="numbers-full">
+        </simple-dropdown>
+        <button type="reset">Reset</button>
+        <button type="submit">Send</button>
+      </form>
+      <table>
+        <tr>
+          <td class="config-cell">disabled:</td>
+          <td id="disabled-value"></td>
+        </tr>
+        <tr>
+          <td class="config-cell">itemsref:</td>
+          <td id="itemsref-value"></td>
+        </tr>
+        <tr>
+          <td class="config-cell">required:</td>
+          <td id="required-value"></td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>Simple Dropdown Value:</td>
+          <td class="value-displayer" id="simple-dropdown-value"></td>
+        </tr>
+        <tr>
+          <td>Form Data Value:</td>
+          <td class="value-displayer" id="form-data-value"></td>
+        </tr>
+      </table>
+    </div>
     <script type="module" src="./main.js"></script>
-    <form onsubmit="onSubmit(event)">
-      <simple-dropdown
-        class="my-dropdown"
-        disabled
-        onchange="handleChange(event)"
-        placeholder="Select choice"
-        name="selection"
-        selected="one"
-        itemsref="1">
-      </simple-dropdown>
-      <button type="reset">Reset</button>
-      <button type="submit">Send</butotn>
-    </form>
   </body>
 </html>
