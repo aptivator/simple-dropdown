@@ -63,21 +63,21 @@ describe('interaction (selections wrapper element)', () => {
     let selectionIndex = 0;
     let [value, label] = itemsNumbersWithDisabled[selectionIndex];
     let child = selectionsEl.children[selectionIndex];
-    fireEvent.mouseUp(child, getElementCenter(child));
+    fireEvent.pointerUp(child, getElementCenter(child));
     expect(dropdownEl.value).to.equal(value);
     expect(choiceEl.innerText).to.equal(label)
   });
 
   it('will not select a disabled item (for coverage)', async () => {
     let child = selectionsEl.children[1];
-    fireEvent.mouseUp(child, getElementCenter(child));
+    fireEvent.pointerUp(child, getElementCenter(child));
     expect(dropdownEl.value).to.equal(defaultValue);
     expect(choiceEl.innerText).to.equal(defaultPlaceholder)
     expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.true;
   });
 
   it('ignores mouse down events and keeps the dropdown open', () => {
-    selectionsWrapperEl.dispatchEvent(new Event('mousedown'));
+    selectionsWrapperEl.dispatchEvent(new Event('pointerdown'));
     selectorEl.blur();
     expect(dropdownEl.value).to.equal(defaultValue);
     expect(choiceEl.innerText).to.equal(defaultPlaceholder)
@@ -97,12 +97,12 @@ describe('interaction (selections wrapper element)', () => {
     expect(dropdownEl.classList.contains(classes.dirty)).to.be.false;
   });
 
-  it('bypasses mouseup event that sets value unless it occurs over a selection (for coverage)', () => {
+  it('bypasses pointerup event that sets value unless it occurs over a selection (for coverage)', () => {
     let child = selectionsEl.children[0];
     let {left, width} = selectionsWrapperEl.getBoundingClientRect();
     let coords = getElementCenter(child);
     coords.clientX = left + width - 1;
-    fireEvent.mouseUp(selectionsWrapperEl, coords);
+    fireEvent.pointerUp(selectionsWrapperEl, coords);
     expect(dropdownEl.value).to.equal(defaultValue);
     expect(choiceEl.innerText).to.equal(defaultPlaceholder);
     expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.true;

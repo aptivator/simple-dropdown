@@ -289,11 +289,11 @@ export class SimpleDropdown extends FormHTMLElement {
       }
     });
 
-    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'mousedown', () => {
+    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'pointerdown', () => {
       this.#preventSelectorBlur = true;
     });
 
-    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'mouseup', (event) => {
+    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'pointerup', (event) => {
       let {clientX, clientY} = event;
       let selection = document.elementFromPoint(clientX, clientY);
 
