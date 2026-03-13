@@ -8,9 +8,25 @@ let itemsrefToNext = {
   'colors': 'numbers-full'
 };
 
+let customStyle = document.createElement('style');
+customStyle.textContent = `
+  simple-dropdown.my-dropdown {
+    width: 200px;
+
+    .simple-dropdown-selector-wrapper {
+      height: 24px;
+    }
+
+    .simple-dropdown-selection {
+      height: 20px;
+    }
+  }
+`;
+
 let toggleRequiredButton = document.getElementById('toggle-required');
 let toggleDisabledButton = document.getElementById('toggle-disabled');
 let toggleItemsrefButton = document.getElementById('toggle-itemsref');
+let toggleStylesButton = document.getElementById('toggle-styles');
 let simpleDropdownValueEl = document.getElementById('simple-dropdown-value');
 let formDataValueEl = document.getElementById('form-data-value');
 let disabledValueEl = document.getElementById('disabled-value');
@@ -39,6 +55,14 @@ toggleItemsrefButton.addEventListener('click', () => {
   itemsref = itemsrefToNext[itemsref];
   dropdownEl.itemsref = itemsref;
   itemsrefValueEl.innerText = dropdownEl.itemsref;
+});
+
+toggleStylesButton.addEventListener('click', () => {
+  if(customStyle.parentNode) {
+    customStyle.remove();
+  } else {
+    document.head.appendChild(customStyle);
+  }
 });
 
 dropdownEl.addEventListener('change', (evt) => {
