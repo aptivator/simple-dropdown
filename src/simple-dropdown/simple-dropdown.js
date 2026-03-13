@@ -278,10 +278,6 @@ export class SimpleDropdown extends FormHTMLElement {
     });
   }
 
-  #handlePointerDown() {
-    
-  }
-
   #addSelectionsWrapperElListeners() {
     let unsubscribeMousemove = addEventListener(this.#selectionsWrapperEl, 'mousemove', (event) => {
       let {clientX, clientY} = event;
@@ -293,8 +289,7 @@ export class SimpleDropdown extends FormHTMLElement {
       }
     });
 
-    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'pointerdown', (event) => {
-      alert(event.pointerType);
+    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'pointerdown', () => {
       this.#preventSelectorBlur = true;
     });
 
