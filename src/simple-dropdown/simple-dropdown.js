@@ -542,7 +542,10 @@ export class SimpleDropdown extends FormHTMLElement {
   }
 
   #scrollIntoViewIfVisibile(selection) {
-    if(this.#selectionsWrapperEl.checkVisibility({opacityProperty: true})) {
+    let styles = getComputedStyle(this.#selectionsWrapperEl);
+    let opacity = +styles.getPropertyValue('opacity');
+
+    if(opacity) {
       selection.scrollIntoView({block: 'nearest'});
     }
   }
