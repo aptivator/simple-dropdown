@@ -124,7 +124,7 @@ setConfigProfile('instant', {scrollBehavior: {behavior: 'instant'}});
 ```
 
 When a `simple-dropdown` is instantiated, a configuration referenced by the `instant` alias
-is retrieved and will override a part of global settings.
+is retrieved and will override a part of the global settings.
 
 ##### Direct Component Configuration
 
@@ -137,7 +137,7 @@ let simpleDropdownEl = document.createElement('simple-dropdown');
 simpleDropdownEl.configs = {triggerImmediately: false};
 ```
 
-`{triggerImmediately: false}` declaration does not replace all of global settings.  It
+`{triggerImmediately: false}` declaration does not replace all of the global settings.  It
 overrides only the previous `triggerImmediately` configuration.
 
 #### Defining Dropdown Items
@@ -272,7 +272,7 @@ The following attributes are specific to `simple-dropdown`: `configsref`, `items
 `configsref` is an alias of a configuration profile that includes settings that would override their
 respective global controls.
 
-`itemsref` is an alias for the items data that a `simple-dropdown` instance is to render.
+`itemsref` is an alias for the items' data that a `simple-dropdown` instance is to render.
 
 `placeholder` is a component message that is displayed when no item/value is selected.  When no
 placeholder is provided, the default `Make a selection` is used.
@@ -283,12 +283,15 @@ clearer control (i.e., `x`), clicking of which will replace a selected value wit
 (`""`).
 
 `selected` is a value with which a `simple-dropdown` instance must be initialized.  The value
-must occur in the items data.  If `selected` is an unknown value, then a warning will be displayed
+must occur in the items' data.  If `selected` is an unknown value, then a warning will be displayed
 and a component's value will be set to the empty space (`""`).
 
 A component's behavior is also affected by the `disabled` and `name` attributes.  The former
 disables a component.  The latter is an alias under which a component's value is included
 within a form data.
+
+`simple-dropdown`, by default, adds `tabindex` attribute and sets it to `0`.  This operation is
+ignored if `tabindex` is already set.
 
 #### Component Properties
 
@@ -383,20 +386,38 @@ or the empty space (`""`).
 ### Customizing the Default Styles
 
 This widget does not attach a shadow DOM.  All of the default styles can thus be easily overridden
-using rule sets with higher specificity selectors.  Before adding modifications, the existing CSS structure
-in the [simple-dropdown.css](./src/simple-dropdown/simple-dropdown.css) should be consulted.
+using rule sets with higher specificity selectors.  Before adding modifications, the existing CSS
+structure in the [simple-dropdown.css](./src/simple-dropdown/simple-dropdown.css) should be consulted.
 
-Below is an example to override an appearance of a disabled `simple-dropdown`.
+`simple-dropdown` uses container units.  Changing the width of the main element and the heights of 
+`.simple-dropdown-selector-wrapper` and `.simple-dropdown-selection` is all that is necessary to get
+a dropdown to the needed dimensions.  The minimum height of the `.simple-dropdown-selections-wrapper`
+may also need to be adjusted to present a subset of items without visual truncation.
 
 *HTML Markup*
 ```html
 <simple-dropdown class="my-dropdown" disabled itemsref="numbers"></simple-dropdown>
 ```
 
-*CSS*
+*Overriding Disabled Appearance*
 ```css
 simple-dropdown.my-dropdown:disabled {
   opacity: 0.4;
+}
+```
+
+*Overriding Width and Height*
+```css
+simple-dropdown.my-dropdown {
+  width: 200px;
+
+  .simple-dropdown-selector-wrapper {
+    height: 24px;
+  }
+
+  .simple-dropdown-selection {
+    height: 20px;
+  }
 }
 ```
 
@@ -469,11 +490,14 @@ necessary only if a new feature is added or an existing documented feature is mo
 ## Caveats
 
 This component is written for a modern browser.  A build with `simple-dropdown` that targets
-older platforms should be assembled with all of the necessary transpilations.
+older platforms should be assembled with all of the prerequisite transpilations.
 
 As mentioned in the integration with forms section, `formAssociated()` and `formStateReset()`
 form lifecycle hooks are not implemented.  `adoptedCallback()` web component lifecycle hook
 is also not supported.
+
+`simple-dropdown` was tested and will work with mobile browsers.  However, its appearance and
+visual functioning will be the same as in the desktop browsers.
 
 ## Future Features
 
