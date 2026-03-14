@@ -289,6 +289,10 @@ export class SimpleDropdown extends FormHTMLElement {
         }
       }
     });
+
+    this.#trap.c = addEventListener(this, 'touchstart', (event) => {
+      //event.stopPropagation();
+    });
   }
 
   #addSelectionsWrapperElListeners() {
@@ -405,7 +409,7 @@ export class SimpleDropdown extends FormHTMLElement {
 
   #addSelectorWrapperElListener() {
     this.#trap.c = addEventListener(this.#selectorWrapperEl, 'touchstart', (event) => {
-      event.stopPropagation();
+      //event.stopPropagation();
     });
   }
 

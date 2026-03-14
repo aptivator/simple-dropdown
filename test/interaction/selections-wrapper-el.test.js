@@ -107,4 +107,10 @@ describe('interaction (selections wrapper element)', () => {
     expect(choiceEl.innerText).to.equal(defaultPlaceholder);
     expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.true;
   });
+
+  it('intercepts touchstart event when open and prevents its propagation', () => {
+    let child = selectionsEl.children[1];
+    fireEvent.touchStart(child);
+    expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.true;
+  });
 });
