@@ -238,6 +238,7 @@ export class SimpleDropdown extends FormHTMLElement {
 
   #addEventListeners() {
     this.#addClearerElListener();
+    this.#addDocumentListener();
     this.#addMainElListener();
     this.#addSelectionsWrapperElListeners();
     this.#addSelectorElListeners();
@@ -246,6 +247,14 @@ export class SimpleDropdown extends FormHTMLElement {
   #addClearerElListener() {
     this.#trap.c = addEventListener(this.#clearerEl, 'focus', () => {
       this.#clearSelectedAndFocus();
+    });
+  }
+
+  #addDocumentListener() {
+    this.#trap.c = addEventListener(document, 'touchstart', () => {
+      if(this.#isVisibleByOpacity(this.#selectionsWrapperEl)) {
+        this.focus();
+      }
     });
   }
 
@@ -323,6 +332,10 @@ export class SimpleDropdown extends FormHTMLElement {
           this.#potentialSelection = selection;
         }
       }
+    });
+
+    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'touchstart', (event) => {
+      event.stopPropagation();
     });
   }
 
@@ -464,6 +477,11 @@ export class SimpleDropdown extends FormHTMLElement {
     return !hasAnyClasses(selection, nonSelectableClasses);
   }
 
+  #isVisibleByOpacity(element) {
+    let styles = getComputedStyle(element);
+    return +styles.getPropertyValue('opacity');
+  }
+
   #processItems(items) {
     items = normalizeItems(items);
     this.#renderItems(items);
@@ -537,10 +555,7 @@ export class SimpleDropdown extends FormHTMLElement {
   }
 
   #scrollIntoViewIfVisibile(selection) {
-    let styles = getComputedStyle(this.#selectionsWrapperEl);
-    let opacity = +styles.getPropertyValue('opacity');
-
-    if(opacity) {
+    if(this.#isVisibleByOpacity(this.#selectionsWrapperEl)) {
       selection.scrollIntoView({block: 'nearest'});
     }
   }
