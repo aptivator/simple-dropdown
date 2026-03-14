@@ -257,7 +257,7 @@ export class SimpleDropdown extends FormHTMLElement {
   #addDocumentListener() {
     this.#trap.c = addEventListener(document, 'touchend', () => {
       if(this.#isVisibleByOpacity(this.#selectionsWrapperEl)) {
-        setTimeout(() => this.focus(), 100);
+        this.#selectorEl.blur();
       }
     });
   }
