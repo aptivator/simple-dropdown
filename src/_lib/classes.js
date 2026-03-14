@@ -1,14 +1,15 @@
 import {libraryName} from './vars';
 
-const _selectionClass = `${libraryName}-selection`;
-
-const _selectionsClass = `${_selectionClass}s`;
+let _selectionClass = `${libraryName}-selection`;
+let _selectionsClass = `${_selectionClass}s`;
+let _selectorClass = `${libraryName}-selector`;
 
 export const classes = {
   choice: `${libraryName}-choice`,
   clearer: `${libraryName}-clearer`,
   dirty: `${libraryName}-dirty`,
-  selector: `${libraryName}-selector`,
+  selector: _selectorClass,
+  selectorWrapper: `${_selectorClass}-wrapper`,
   placeholder: `${libraryName}-placeholder`,
   selected: `${libraryName}-selected`,
   selection: _selectionClass,

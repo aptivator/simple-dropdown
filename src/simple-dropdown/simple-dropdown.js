@@ -59,6 +59,8 @@ export class SimpleDropdown extends FormHTMLElement {
 
   #selectorEl;
 
+  #selectorWrapperEl;
+
   #trap = createTrapObject({c: 'callbacks'});
 
   #valueToLabelSelectionMap = new Map();
@@ -184,6 +186,7 @@ export class SimpleDropdown extends FormHTMLElement {
       this.#clearerEl = this.querySelector(`.${classes.clearer}`);
       this.#selectionsWrapperEl = this.querySelector(`.${classes.selectionsWrapper}`);
       this.#selectorEl = this.querySelector(`.${classes.selector}`);
+      this.#selectorWrapperEl = this.querySelector(`.${classes.selectorWrapper}`);
       this.#selectionsWrapperEl.append(this.#selectionsEl);
       this.#connected = true;
 
@@ -242,6 +245,7 @@ export class SimpleDropdown extends FormHTMLElement {
     this.#addMainElListener();
     this.#addSelectionsWrapperElListeners();
     this.#addSelectorElListeners();
+    this.#addSelectorWrapperElListener();
   }
 
   #addClearerElListener() {
@@ -251,9 +255,9 @@ export class SimpleDropdown extends FormHTMLElement {
   }
 
   #addDocumentListener() {
-    this.#trap.c = addEventListener(document, 'touchstart', () => {
+    this.#trap.c = addEventListener(document, 'touchend', () => {
       if(this.#isVisibleByOpacity(this.#selectionsWrapperEl)) {
-        this.focus();
+        setTimeout(() => this.focus(), 400);
       }
     });
   }
@@ -334,7 +338,7 @@ export class SimpleDropdown extends FormHTMLElement {
       }
     });
 
-    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'touchstart', (event) => {
+    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'touchend', (event) => {
       event.stopPropagation();
     });
   }
@@ -396,6 +400,12 @@ export class SimpleDropdown extends FormHTMLElement {
       if(arrowNavigationCodes.has(code) && this.#navigationSelection) {
         return this.#handleArrowNavigation(code);
       }
+    });
+  }
+
+  #addSelectorWrapperElListener() {
+    this.#trap.c = addEventListener(this.#selectorWrapperEl, 'touchend', (event) => {
+      event.stopPropagation();
     });
   }
 
