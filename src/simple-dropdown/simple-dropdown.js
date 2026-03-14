@@ -59,8 +59,6 @@ export class SimpleDropdown extends FormHTMLElement {
 
   #selectorEl;
 
-  #selectorWrapperEl;
-
   #trap = createTrapObject({c: 'callbacks'});
 
   #valueToLabelSelectionMap = new Map();
@@ -186,7 +184,6 @@ export class SimpleDropdown extends FormHTMLElement {
       this.#clearerEl = this.querySelector(`.${classes.clearer}`);
       this.#selectionsWrapperEl = this.querySelector(`.${classes.selectionsWrapper}`);
       this.#selectorEl = this.querySelector(`.${classes.selector}`);
-      this.#selectorWrapperEl = this.querySelector(`.${classes.selectorWrapper}`);
       this.#selectionsWrapperEl.append(this.#selectionsEl);
       this.#connected = true;
 

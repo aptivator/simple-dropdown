@@ -1,3 +1,4 @@
+import {fireEvent}                           from '@testing-library/dom';
 import {beforeEach, describe, it, expect}    from 'vitest';
 import {userEvent}                           from 'vitest/browser';
 import {defaultPlaceholder, defaultValue}    from '../../src/_lib/vars';
@@ -100,5 +101,13 @@ describe('interaction (main element [simple-dropdown])', () => {
     expect(choiceEl.innerText).to.equal(defaultPlaceholder);
     await userEvent.keyboard('[Escape]');
     expect(choiceEl.innerText).to.equal(defaultPlaceholder);
+  });
+
+  it('stops propagation of touchstart', async () => {
+    let invocationCount = 0;
+    await userEvent.keyboard(' ');
+    document.addEventListener('touchstart', () => invocationCount++, {once: true});
+    fireEvent.touchStart(dropdownEl);
+    expect(invocationCount).to.equal(0);
   });
 });
