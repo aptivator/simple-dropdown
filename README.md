@@ -444,12 +444,12 @@ highlighted for selection.  Pressing the Escape key will reset a highlighted ite
 ### Interaction CSS classes
 
 This implementation borrows from Angular framework's convention of `dirty` and `touched` classes.  When a
-freshly loaded `simple-dropdown`'s items are first displayed, the `simple-dropdown-touched` class is added
-to the element.  When any of the non-disabled items are hovered over or focused through the use of up and/or
-down keys, the `simple-dropdown-dirty` class is attached to the dropdown.  A dropdown with an initial or
-selected value gets tagged with the `simple-dropdown-selected` class.  `simple-dropdown-touched` and
-`simple-dropdown-dirty` are permanent: once they are added, they will not be removed.  The
-`simple-dropdown-selected` is removed when a component is cleared or reset.
+freshly loaded `simple-dropdown`'s items are first displayed after the widget is clicked or space-keyed, the
+`simple-dropdown-touched` class is added to the element.  When any of the non-disabled items are hovered over
+or focused through the use of up and/or down keys, the `simple-dropdown-dirty` class is attached to the dropdown.
+A dropdown with an initial or selected value gets tagged with the `simple-dropdown-selected` class.
+`simple-dropdown-touched` and `simple-dropdown-dirty` are permanent: once they are added, they will not be removed.
+The `simple-dropdown-selected` is removed when a component is cleared or reset.
 
 ## Development
 
