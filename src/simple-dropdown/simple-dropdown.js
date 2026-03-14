@@ -245,7 +245,6 @@ export class SimpleDropdown extends FormHTMLElement {
     this.#addMainElListener();
     this.#addSelectionsWrapperElListeners();
     this.#addSelectorElListeners();
-    this.#addSelectorWrapperElListener();
   }
 
   #addClearerElListener() {
@@ -291,7 +290,7 @@ export class SimpleDropdown extends FormHTMLElement {
     });
 
     this.#trap.c = addEventListener(this, 'touchstart', (event) => {
-      //event.stopPropagation();
+      event.stopPropagation();
     });
   }
 
@@ -404,12 +403,6 @@ export class SimpleDropdown extends FormHTMLElement {
       if(arrowNavigationCodes.has(code) && this.#navigationSelection) {
         return this.#handleArrowNavigation(code);
       }
-    });
-  }
-
-  #addSelectorWrapperElListener() {
-    this.#trap.c = addEventListener(this.#selectorWrapperEl, 'touchstart', (event) => {
-      //event.stopPropagation();
     });
   }
 
