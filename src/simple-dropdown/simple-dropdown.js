@@ -255,7 +255,7 @@ export class SimpleDropdown extends FormHTMLElement {
   }
 
   #addDocumentListener() {
-    this.#trap.c = addEventListener(document, 'touchend', () => {
+    this.#trap.c = addEventListener(document, 'touchstart', () => {
       if(this.#isVisibleByOpacity(this.#selectionsWrapperEl)) {
         this.#selectorEl.blur();
       }
@@ -338,7 +338,7 @@ export class SimpleDropdown extends FormHTMLElement {
       }
     });
 
-    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'touchend', (event) => {
+    this.#trap.c = addEventListener(this.#selectionsWrapperEl, 'touchstart', (event) => {
       event.stopPropagation();
     });
   }
@@ -404,7 +404,7 @@ export class SimpleDropdown extends FormHTMLElement {
   }
 
   #addSelectorWrapperElListener() {
-    this.#trap.c = addEventListener(this.#selectorWrapperEl, 'touchend', (event) => {
+    this.#trap.c = addEventListener(this.#selectorWrapperEl, 'touchstart', (event) => {
       event.stopPropagation();
     });
   }
