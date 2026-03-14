@@ -41,7 +41,7 @@ describe('integration (within a form)', () => {
       expect(dropdownEl.disabled).to.be.true;
     });
 
-    it('does not un-disable a simple-dropdown that was disabled via disabling of a fieldset when the latter is re-enabled', () => {
+    it('does not undisable a simple-dropdown that was disabled via disabling of its fieldset when the latter is re-enabled', () => {
       expect(dropdownEl.disabled).toBeFalsy;
       fieldset.setAttribute('disabled', '');
       expect(dropdownEl.disabled).to.be.true;
@@ -119,7 +119,7 @@ describe('integration (within a form)', () => {
       expect(form.checkValidity()).to.be.true;
     });
 
-    it('serves a vlidation message', () => {
+    it('serves a validation message', () => {
       dropdownEl.required = true;
       expect(dropdownEl.validationMessage).to.equal(simpleDropdownName + ' is required');
     });

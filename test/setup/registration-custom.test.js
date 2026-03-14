@@ -10,7 +10,7 @@ describe('custom registration via registerSimpleDropdown()', () => {
     expect(customElements.get(componentName)).to.equal(SimpleDropdown);
   });
 
-  it('namespaces stylesheets under the custom tag name', () => {
+  it('namespaces stylesheets under a custom tag name', () => {
     expect(document.head.querySelector('style:last-child').textContent.startsWith(componentName)).to.be.true;
   });
 

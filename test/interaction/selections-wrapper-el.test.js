@@ -15,7 +15,8 @@ describe('interaction (selections wrapper element)', () => {
   let dropdownEl, choiceEl, selectionsEl, selectionsWrapperEl, selectorEl, selectionHeight;
 
   beforeEach(async () => {
-    ({dropdownEl, choiceEl, selectionsEl, selectionsWrapperEl, selectorEl} = render([['itemsref', itemsrefNumbersWithDisabled]]));
+    let elements = render([['itemsref', itemsrefNumbersWithDisabled]]);
+    ({dropdownEl, choiceEl, selectionsEl, selectionsWrapperEl, selectorEl} = elements);
     selectionHeight = getComputedStyle(selectionsEl.children[0]).getPropertyValue('height');
     selectionHeight = parseFloat(selectionHeight);
     dropdownEl.focus();
@@ -76,7 +77,7 @@ describe('interaction (selections wrapper element)', () => {
     expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.true;
   });
 
-  it('ignores mouse down events and keeps the dropdown open', () => {
+  it('ignores the pointer down event and keeps the dropdown open', () => {
     selectionsWrapperEl.dispatchEvent(new Event('pointerdown'));
     selectorEl.blur();
     expect(dropdownEl.value).to.equal(defaultValue);
@@ -97,7 +98,7 @@ describe('interaction (selections wrapper element)', () => {
     expect(dropdownEl.classList.contains(classes.dirty)).to.be.false;
   });
 
-  it('bypasses pointerup event that sets value unless it occurs over a selection (for coverage)', () => {
+  it('bypasses the pointerup event that sets value unless it occurs over a selection (for coverage)', () => {
     let child = selectionsEl.children[0];
     let {left, width} = selectionsWrapperEl.getBoundingClientRect();
     let coords = getElementCenter(child);
@@ -108,9 +109,11 @@ describe('interaction (selections wrapper element)', () => {
     expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.true;
   });
 
-  it('intercepts touchstart event when open and prevents its propagation', () => {
+  it('intercepts the touchstart event when open and prevents its propagation', () => {
+    let invocationCount = 0;
     let child = selectionsEl.children[1];
+    document.addEventListener('touchstart', () => invocationCount++);
     fireEvent.touchStart(child);
-    expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.true;
+    expect(invocationCount).to.equal(0);
   });
 });

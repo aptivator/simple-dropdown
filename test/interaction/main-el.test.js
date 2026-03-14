@@ -19,7 +19,7 @@ describe('interaction (main element [simple-dropdown])', () => {
     dropdownEl.focus();
   });
 
-  it('receives a keydown event when focused and displays a dropdown when the [Space] key is pressed', async () => {
+  it('receives a keydown event when focused and displays the items when the [Space] key is pressed', async () => {
     expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.false;
     await userEvent.keyboard(' ');
     expect(dropdownEl).not.toHaveFocus();
@@ -103,7 +103,7 @@ describe('interaction (main element [simple-dropdown])', () => {
     expect(choiceEl.innerText).to.equal(defaultPlaceholder);
   });
 
-  it('stops propagation of touchstart', async () => {
+  it('stops the event propagation of touchstart', async () => {
     let invocationCount = 0;
     await userEvent.keyboard(' ');
     document.addEventListener('touchstart', () => invocationCount++, {once: true});

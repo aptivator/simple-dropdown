@@ -13,7 +13,7 @@ describe('instantiation (markup)', () => {
   afterAll(restoreOriginals);
 
   describe('disabled', () => {
-    it('indicates to remove pointer events and lower opacity when present', () => {
+    it('indicates to remove pointer events and to lower opacity when present', () => {
       let {dropdownEl} = render(['disabled']);
       let styles = getComputedStyle(dropdownEl);
       expect(styles.getPropertyValue('pointer-events')).to.equal('none');
@@ -61,13 +61,13 @@ describe('instantiation (markup)', () => {
       expect(dropdownEl.validity.valueMissing).to.be.true;
     });
 
-    it('makes selection clearer visibile when value is set and simple dropdown is NOT required', () => {
+    it('makes selection clearer visible when a value is set and simple dropdown is NOT required', () => {
       let [value] = itemsNumbers.at(-2);
       let {clearerEl} = render([['itemsref', itemsrefNumbers], ['selected', value]]);
       expect(clearerEl.checkVisibility()).to.be.true;
     });
 
-    it('hides selection clearer when value is set and simple dropdown is required', () => {
+    it('hides selection clearer when a value is set and simple dropdown is required', () => {
       let [value] = itemsNumbers.at(-2);
       let {clearerEl} = render([['itemsref', itemsrefNumbers], 'required', ['selected', value]]);
       expect(clearerEl.checkVisibility()).to.be.false;
@@ -75,7 +75,7 @@ describe('instantiation (markup)', () => {
   });
 
   describe('selected', () => {
-    it(`keeps the component's value as an empty space('') when uninitialized`, () => {
+    it(`keeps the component's value as the empty space('') when uninitialized`, () => {
       let {dropdownEl} = render();
       expect(dropdownEl.value).to.equal(defaultValue);
     });
@@ -88,14 +88,14 @@ describe('instantiation (markup)', () => {
       
     });
 
-    it(`warns when a selected value does not exist among the items and sets the value to empty space('')`, () => {
+    it(`warns when a selected value does not exist among the items and sets the value to the empty space('')`, () => {
       let selectedValue = 'none';
       let {dropdownEl} = render([['itemsref', itemsrefNumbers], ['selected', selectedValue]]);
       expect(messages.warning).to.include(`trying to select value "${selectedValue}" that does not exit`);
       expect(dropdownEl.value).to.equal(defaultValue);
     });
 
-    it('warns when no items were specified and a seleted value is specified', () => {
+    it('warns when no items were specified and a selected value is specified', () => {
       let selectedValue = 'none';
       let {dropdownEl} = render([['selected', selectedValue]]);
       expect(messages.warning).to.include(`trying to select value "${selectedValue}" that does not exit`);

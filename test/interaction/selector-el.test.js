@@ -18,7 +18,8 @@ describe('interaction (selector element)', () => {
   let dropdownEl, choiceEl, selectionsEl, selectionsWrapperEl, selectorEl;
 
   beforeEach(async () => {
-    ({dropdownEl, choiceEl, selectionsEl, selectionsWrapperEl, selectorEl} = render([['itemsref', itemsrefNumbersWithDisabled]]));
+    let elements = render([['itemsref', itemsrefNumbersWithDisabled]]);
+    ({dropdownEl, choiceEl, selectionsEl, selectionsWrapperEl, selectorEl} = elements);
     dropdownEl.focus();
     await userEvent.keyboard(' ');
   });
@@ -34,7 +35,7 @@ describe('interaction (selector element)', () => {
     expect(dropdownEl).toHaveFocus();
   });
 
-  it('preserves the scroll position within selections area when the [Space] key is pressed', async () => {
+  it('preserves the scroll position within the selections area when the [Space] key is pressed', async () => {
     for(let i = 0; i < 3; i++) {
       await userEvent.keyboard('[ArrowDown]');
     }
@@ -71,7 +72,7 @@ describe('interaction (selector element)', () => {
     expect(dropdownEl).toHaveFocus();
   });
 
-  it('does not preserve scroll position when the [Escape] key is pressed; when there is no selection, the scroll position is moved to the start', async () => {
+  it('does not preserve the scroll position when the [Escape] key is pressed; when there is no selection, the scroll position is moved to the start', async () => {
     for(let i = 0; i < 3; i++) {
       await userEvent.keyboard('[ArrowDown]');
     }
@@ -100,7 +101,7 @@ describe('interaction (selector element)', () => {
     }
   });
 
-  it('does not preserve scroll position when the [Escape] key is pressed; WITH selection, the scroll position is moved to show the selected item', async () => {
+  it('does not preserve the scroll position when the [Escape] key is pressed; WITH selection, the scroll position is moved to show the selected item', async () => {
     let {length} = itemsNumbersWithDisabled;
     let lastIndex = length - 1;
     dropdownEl.value = itemsNumbersWithDisabled[lastIndex][0];
@@ -123,7 +124,7 @@ describe('interaction (selector element)', () => {
     }
   });
 
-  it('sets an element value when the [Enter] key is pressed and there is a potential selection', async () => {
+  it('sets the element value when the [Enter] key is pressed and there is a potential selection', async () => {
     let [value, label] = itemsNumbersWithDisabled[5];
     
     for(let i = 0; i < 3; i++) {
@@ -135,7 +136,7 @@ describe('interaction (selector element)', () => {
     expect(choiceEl.innerText).to.equal(label);
   });
 
-  it('does not set an element value when Enter is pressed and no item is highlighted (for coverage)', () => {
+  it('does not set the element value when the [Enter] key is pressed and no item is highlighted (for coverage)', () => {
     fireEvent.keyDown(selectorEl, {code: 'Enter'});
     expect(selectionsWrapperEl.checkVisibility({opacityProperty: true})).to.be.true;
     expect(dropdownEl.value).to.equal(defaultValue);
@@ -160,7 +161,7 @@ describe('interaction (selector element)', () => {
     expect(isElementVisible(firstChild, selectionsWrapperEl)).to.be.true;
   });
 
-  it('will not perform navigation by arrow if navigation selection element does not have a corresponding sibling', async () => {
+  it('will not perform a navigation by arrow if navigation selection element does not have a corresponding sibling', async () => {
     await userEvent.keyboard('[ArrowUp]');
     expect(dropdownEl.value).to.equal(defaultValue);
     expect(choiceEl.innerText).to.equal(defaultPlaceholder);
@@ -174,7 +175,7 @@ describe('interaction (selector element)', () => {
     expect(choiceEl.innerText).to.equal(defaultPlaceholder);
   });
 
-  it('sets a new potential selection when if it is different from the existing one (for coverage)', async () => {
+  it('sets a new potential selection if it is different from the existing one (for coverage)', async () => {
     let [value, label] = itemsNumbersWithDisabled[5];
     
     for(let i = 0; i < 3; i++) {

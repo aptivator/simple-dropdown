@@ -1,10 +1,8 @@
 import {fireEvent}                           from '@testing-library/dom';
 import {beforeEach, describe, it, expect}    from 'vitest';
 import {userEvent}                           from 'vitest/browser';
-import {classes}                             from '../../src/_lib/classes';
-import {defaultPlaceholder, defaultValue}    from '../../src/_lib/vars';
 import {defineItems, registerSimpleDropdown} from '../../src';
-import {getElementCenter, render}            from '../_lib/utils';
+import {render}                              from '../_lib/utils';
 import {itemsNumbersWithDisabled}            from '../_lib/vars';
 
 let itemsrefNumbersWithDisabled = 'numbers-with-disabled';

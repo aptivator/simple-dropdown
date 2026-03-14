@@ -20,7 +20,7 @@ describe('items definition via defineItems()', () => {
     expect(itemsStore.get(alias)).to.eql(expectedItems);
   });
 
-  it('accepts an array of strings and normalizes it by treating each string as a value and a label', () => {
+  it('accepts an array of strings and normalizes them by treating each string as a value and a label', () => {
     let items = ['one', 'two'];
     let expectedItems = items.map((item) => [item, item]);
     defineItems(alias, items);
@@ -35,7 +35,7 @@ describe('items definition via defineItems()', () => {
     expect(itemsStore.get(alias)).to.eql(expectedItems);
   });
 
-  it('errors if items are attempted to be stored an an already-existing alias', () => {
+  it('errors if items are attempted to be stored as an already-existing alias', () => {
     defineItems(alias, []);
     expect(() => defineItems(alias, [])).to.throw(`items are already stored under "${alias}"`);
   });

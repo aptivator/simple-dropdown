@@ -56,7 +56,7 @@ describe('instantiation (programmatic)', () => {
       expect(choiceEl.innerText).to.equal(label)
     });
 
-    it('processes items before a component is added to the DOM', () => {
+    it('processes items before the component is added to the DOM', () => {
       let dropdownEl = document.createElement(libraryName);
       let items = structuredClone(itemsNumbers);
       let item = items.at(-1);
@@ -74,7 +74,7 @@ describe('instantiation (programmatic)', () => {
       expect(document.querySelectorAll(`.${classes.selectionDisabled}`).length).to.equal(itemsNumbersAllDisabled.length);
     });
 
-    it(`re-renders items with new data and without a matching selected item, the value is set to empty space ('')`, () => {
+    it(`re-renders items with new data and without a matching selected item, the value is set to the empty space ('')`, () => {
       let [value] = itemsNumbers[0]
       let {choiceEl, dropdownEl, selectionsEl} = render([['itemsref', itemsrefNumbers], ['selected', value]]);
       dropdownEl.items = itemsColors;
@@ -105,7 +105,7 @@ describe('instantiation (programmatic)', () => {
       unsubscribe();
     });
 
-    it('changes the items and keeps the potential selection if its value is present among the new items', async () => {
+    it('changes the items and keeps a potential selection if its value is present among the new items', async () => {
       let [value] = itemsNumbers.at(-1);
       let expectedIndex = 0;
       let [expectedValue] = itemsNumbers[expectedIndex];
@@ -120,7 +120,7 @@ describe('instantiation (programmatic)', () => {
       expect(dropdownEl.value).to.equal(expectedValue);
     });
 
-    it('swaps for new items and does not keep the potential selection when its value is NOT present among new selections', async () => {
+    it('swaps for new items and does not keep a potential selection when its value is NOT present among the new selections', async () => {
       let {dropdownEl, selectionsEl, selectorEl, selectionsWrapperEl} = render([['itemsref', itemsrefNumbers]]);
       let child = selectionsEl.children[0];
       await userEvent.click(dropdownEl);
@@ -150,7 +150,7 @@ describe('instantiation (programmatic)', () => {
   });
 
   describe('required', () => {
-    it('sets dropdown as not required internally and via attribute', () => {
+    it('sets dropdown as NOT required internally and via attribute', () => {
       let {dropdownEl} = render(['required']);
       expect(dropdownEl.required).to.be.true;
       dropdownEl.required = false;
@@ -168,7 +168,7 @@ describe('instantiation (programmatic)', () => {
   });
 
   describe('selected', () => {
-    it('returns the value of a dropdown', () => {
+    it(`returns a dropdown's value`, () => {
       let [value] = itemsColors.at(-1);
       let {dropdownEl} = render([['itemsref', itemsrefColors], ['selected', value]]);
       expect(dropdownEl.selected).to.equal(value);
@@ -176,14 +176,14 @@ describe('instantiation (programmatic)', () => {
   });
 
   describe('value', () => {
-    it('sets a value of an element', () => {
+    it(`sets a dropdown's value`, () => {
       let [value, label] = itemsColors.at(-1);
       let {choiceEl, dropdownEl} = render([['itemsref', itemsrefColors]]);
       dropdownEl.value = value;
       expect(choiceEl.innerText).to.equal(label);
     });
 
-    it('will set a value only if it is different from an existing value', () => {
+    it('will set a value only if it is different from the existing value', () => {
       let [value, label] = itemsColors.at(-1);
       let {choiceEl, dropdownEl} = render([['itemsref', itemsrefColors]]);
       let invocationCount = 0;

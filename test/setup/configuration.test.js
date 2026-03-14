@@ -25,7 +25,7 @@ describe('configuration', () => {
     });
   });
 
-  describe('immediate even triggering', () => {
+  describe('immediate event triggering', () => {
     beforeEach(() => setGlobalConfigs({triggerImmediately: false}));
 
     it('controls whether initial value setting triggers a change event', () => {

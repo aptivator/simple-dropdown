@@ -8,7 +8,7 @@ defineItems(itemsrefNumbers, itemsNumbers);
 registerSimpleDropdown();
 
 describe('events', () => {
-  it('accepts onChange event handler within the markup of the element itself', () => {
+  it('accepts a value change event handler within the markup of the element itself', () => {
     let target;
     let handleOnChange = (event) => target = event.target;
     let onChangeHandlerName = 'handleOnChange';
@@ -18,7 +18,7 @@ describe('events', () => {
     expect(target).to.equal(dropdownEl);
   });
 
-  it(`registers onChange event handler on an element's instance`, () => {
+  it(`registers a value change event handler on an element's instance`, () => {
     let target;
     let {dropdownEl} = render([['itemsref', itemsrefNumbers]]);
     dropdownEl.onchange = (event) => target = event.target;
@@ -26,7 +26,7 @@ describe('events', () => {
     expect(target).to.equal(dropdownEl);
   });
 
-  it('assigns change event handler via addEventListener() method', () => {
+  it('assigns a value change event handler via addEventListener() method', () => {
     let recordedValue;
     let {dropdownEl} = render([['itemsref', itemsrefNumbers]]);
     let [value] = itemsNumbers.at(-1);

@@ -10,7 +10,7 @@ defineItems(itemsrefNumbers, itemsNumbers);
 registerSimpleDropdown();
 
 describe('interaction (clearer element)', () => {
-  it(`clears the value by setting it to an empty space ('')`, async () => {
+  it(`clears the value by setting it to the empty space ('')`, async () => {
     let [value, label] = itemsNumbers.at(-1);
     let {choiceEl, clearerEl, dropdownEl} = render([['itemsref', itemsrefNumbers], ['selected', value]]);
     expect(choiceEl.innerText).to.equal(label);
@@ -21,7 +21,7 @@ describe('interaction (clearer element)', () => {
     expect(clearerEl.checkVisibility()).to.be.false;
   });
 
-  it('is not available when a dropdown is required', async () => {
+  it('is not available when the dropdown is required', async () => {
     let [value, label] = itemsNumbers.at(-1);
     let {choiceEl, clearerEl, dropdownEl} = render([['itemsref', itemsrefNumbers], 'required']);
     dropdownEl.value = value;
